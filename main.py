@@ -109,7 +109,7 @@ async def store_file(file: UploadFile = File(...)):
 @app.get("/files")
 async def list_files():
     """
-    List all stored files.
+    List all stored files. 
     
     Returns:
         JSON response with list of filenames
