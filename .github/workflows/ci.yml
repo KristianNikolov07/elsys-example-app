@@ -58,8 +58,9 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository }}
+          IMAGE_NAME=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           GIT_SHA=${{ github.sha }}
+          echo "Building image: $IMAGE_NAME"
           docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$GIT_SHA .
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$GIT_SHA
