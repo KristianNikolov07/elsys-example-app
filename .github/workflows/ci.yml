@@ -61,6 +61,11 @@ jobs:
           IMAGE_NAME=$(echo "ghcr.io/${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           GIT_SHA=${{ github.sha }}
           echo "Building image: $IMAGE_NAME"
+
+          # Ensure we're in the repo root
+          cd $GITHUB_WORKSPACE
+
           docker build -t $IMAGE_NAME:latest -t $IMAGE_NAME:$GIT_SHA .
           docker push $IMAGE_NAME:latest
           docker push $IMAGE_NAME:$GIT_SHA
+
